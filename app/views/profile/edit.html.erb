@@ -1,0 +1,6 @@
+<h1>Profile</h1>
+<%= form_for @user, as: :user, url: profile_update_path, method: :post do |f| %>
+  <%= f.label :name %><br>
+  <%= f.text_field :name %><br><br>
+  <%= f.submit %>
+<%end%>
