@@ -32,15 +32,20 @@ class PostController < ApplicationController
   def update
     created_at = DateTime.parse(post_params[:created_at])
 
-    resource.update_attributes(
-      name: post_params[:name],
-      annonce: post_params[:annonce],
-      text: post_params[:text],
-      created_at: created_at
-    )
+    @post = resource
 
-    flash[:success] = 'Post changed'
-    redirect_to post_path(resource.id)
+    @post.name = post_params[:name]
+    @post.annonce = post_params[:annonce]
+    @post.text = post_params[:text]
+    @post.created_at = created_at
+    @post.save
+
+    if @post.errors.present?
+      render :edit
+    else
+      flash[:success] = 'Post changed'
+      redirect_to post_path(resource.id)
+    end
   end
 
   def destroy

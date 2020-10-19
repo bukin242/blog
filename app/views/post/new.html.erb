@@ -1,11 +1,13 @@
 <div class="post_form">
-<%= form_for @post do |f| %>
-  <%= f.label :name %><br>
-  <%= f.text_field :name %><br>
-  <%= f.label :annonce %><br>
-  <%= f.text_area :annonce %><br>
-  <%= f.label :text %><br>
-  <%= f.text_area :text %><br>
-  <%= f.submit %>
-<%end%>
+  <%= render 'shared/errors', object: @post %>
+
+  <%= form_for @post do |f| %>
+    <%= f.label :name %><br>
+    <%= f.text_field :name %><br>
+    <%= f.label :annonce %><br>
+    <%= f.text_area :annonce %><br>
+    <%= f.label :text %><br>
+    <%= f.text_area :text %><br>
+    <%= f.submit %>
+  <%end%>
 </div>
