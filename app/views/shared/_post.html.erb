@@ -4,5 +4,14 @@
   <small><%= link_to 'Edit', edit_post_path(post.id) %></small>
   <small><%= link_to 'Delete', post_path(post.id), data: {method: :delete, confirm: 'Are you sure?'} %></small>
   <% end %>
+
+  <div class="author">
+    Author:
+    <% if post.user.name %>
+      <%= post.user.name %>
+    <% else %>
+      <%= post.user.email %>
+    <% end %>
+  </div>
 </div>
 <div class="annonce"><%= simple_format(post.annonce) %></div>

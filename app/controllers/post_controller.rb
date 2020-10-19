@@ -1,8 +1,10 @@
 class PostController < ApplicationController
+  before_action :authenticate_user!, only: [:new, :edit, :create, :update, :destroy]
+  before_action :user_required, only: [:edit, :update, :destroy]
   PER_PAGE = 5
 
   def index
-    @posts = Post.active.order('created_at desc')
+    @posts = Post.active.includes(:user).order('created_at desc')
     @posts = @posts.paginate(page: params[:page], per_page: PER_PAGE)
   end
 
@@ -61,6 +63,12 @@ class PostController < ApplicationController
   end
 
   private
+
+  def user_required
+    if resource.user != current_user
+      redirect_to root_path
+    end
+  end
 
   def post_params
     params.require(:post)
