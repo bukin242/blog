@@ -41,8 +41,10 @@ class PostController < ApplicationController
       user_id: current_user.id
     )
 
-    params[:tags].each do |tag_id|
-      @post.post_tags.create(tag_id: tag_id)
+    if params[:tags]
+      params[:tags].each do |tag_id|
+        @post.post_tags.create(tag_id: tag_id)
+      end
     end
 
     if @post.errors.present?
@@ -50,7 +52,7 @@ class PostController < ApplicationController
     else
       Rails.cache.clear
 
-      flash[:success] = 'Post added'
+      flash[:success] = I18n.t('controllers.post.create')
       redirect_to root_path
     end
   end
@@ -66,9 +68,11 @@ class PostController < ApplicationController
     @post.created_at = created_at
     @post.save
 
-    @post.post_tags.destroy_all
-    params[:tags].each do |tag_id|
-      @post.post_tags.create(tag_id: tag_id)
+    if params[:tags]
+      @post.post_tags.destroy_all
+      params[:tags].each do |tag_id|
+        @post.post_tags.create(tag_id: tag_id)
+      end
     end
 
     if @post.errors.present?
@@ -76,7 +80,7 @@ class PostController < ApplicationController
     else
       Rails.cache.clear
 
-      flash[:success] = 'Post changed'
+      flash[:success] = I18n.t('controllers.post.update')
       redirect_to post_path(resource.id)
     end
   end
@@ -85,7 +89,7 @@ class PostController < ApplicationController
     resource.destroy
     Rails.cache.clear
 
-    flash[:success] = 'Post deleted'
+    flash[:success] = I18n.t('controllers.post.destroy')
     redirect_to root_path
   end
 

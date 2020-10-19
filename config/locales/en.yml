@@ -30,4 +30,16 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  controllers:
+    post:
+      create: Post added
+      update: Post changed
+      destroy: Post deleted
+    comment:
+      create: Comment added
+      update: Comment changed
+      destroy: Comment deleted
+    tag:
+      create: Tag added
+      update: Tag changed
+      destroy: Tag deleted

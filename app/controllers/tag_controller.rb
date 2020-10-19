@@ -19,13 +19,14 @@ class TagController < ApplicationController
     if @tag.errors.present?
       render :new
     else
-      flash[:success] = 'Tag added'
+      flash[:success] = I18n.t('controllers.tag.create')
       redirect_to tags_path
     end
   end
 
   def destroy
     resource.destroy
+    flash[:success] = I18n.t('controllers.tag.destroy')
     redirect_to tags_path
   end
 
@@ -38,7 +39,7 @@ class TagController < ApplicationController
     if @tag.errors.present?
       render :edit
     else
-      flash[:success] = 'Tag changed'
+      flash[:success] = I18n.t('controllers.tag.update')
       redirect_to tags_path
     end
   end

@@ -13,7 +13,7 @@ class CommentController < ApplicationController
       expires_at: EXPIRES_TIME.from_now
     )
 
-    flash[:success] = 'Comment added'
+    flash[:success] = I18n.t('controllers.comment.create')
 
     redirect_to post_path(post_id)
   end
@@ -32,14 +32,14 @@ class CommentController < ApplicationController
       @post_id = post_id
       render :edit
     else
-      flash[:success] = 'Comment changed'
+      flash[:success] = I18n.t('controllers.comment.update')
       redirect_to post_path(post_id)
     end
   end
 
   def destroy
     resource.destroy
-    flash[:success] = 'Comment deleted'
+    flash[:success] = I18n.t('controllers.comment.destroy')
     redirect_to post_path(post_id)
   end
 

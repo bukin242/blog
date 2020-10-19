@@ -12,6 +12,9 @@
   <body>
     <%= render partial: 'shared/menu' %>
     <%= render partial: 'shared/login' %>
+    <% flash.each do |key, message| %>
+      <p class="flash <%= key %>"><%= message %></p>
+    <% end %>
     <%= yield %>
   </body>
 </html>
