@@ -3,5 +3,5 @@ Rails.application.routes.draw do
   devise_for :users
   get '/profile' => 'profile#edit', as: :profile_edit
   post '/profile' => 'profile#update', as: :profile_update
-  resources :posts
+  resources :post, as: :posts
 end

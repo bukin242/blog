@@ -1,0 +1,8 @@
+<div class="menu">
+  <ul>
+    <li><%= link_to 'Posts', root_path %></li>
+    <% if current_user %>
+    <li><%= link_to 'Add new post', new_post_path %></li>
+    <% end %>
+  </ul>
+</div>
