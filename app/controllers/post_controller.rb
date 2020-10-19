@@ -17,6 +17,8 @@ class PostController < ApplicationController
 
   def show
     @post = resource
+    @comment = Comment.new
+    @comments = Comment.where(post_id: resource.id).order('created_at desc')
   end
 
   def edit

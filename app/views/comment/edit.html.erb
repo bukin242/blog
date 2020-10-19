@@ -1,0 +1,7 @@
+<h1>Comment edit</h1>
+<%= render 'shared/errors', object: @comment %>
+<%= form_for @comment, url: post_comment_path(post_id: @post_id, id: @comment.id) do |f| %>
+  <%= f.label :text %><br>
+  <%= f.text_area :text %><br>
+  <%= f.submit %>
+<% end %>
