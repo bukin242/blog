@@ -32,6 +32,8 @@ class PostController < ApplicationController
     if @post.errors.present?
       render :new
     else
+      Rails.cache.clear
+
       flash[:success] = 'Post added'
       redirect_to root_path
     end
@@ -51,6 +53,8 @@ class PostController < ApplicationController
     if @post.errors.present?
       render :edit
     else
+      Rails.cache.clear
+
       flash[:success] = 'Post changed'
       redirect_to post_path(resource.id)
     end
@@ -58,6 +62,8 @@ class PostController < ApplicationController
 
   def destroy
     resource.destroy
+    Rails.cache.clear
+
     flash[:success] = 'Post deleted'
     redirect_to root_path
   end
