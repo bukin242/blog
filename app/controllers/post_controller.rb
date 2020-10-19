@@ -1,5 +1,5 @@
 class PostController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :edit, :create, :update, :destroy]
+  before_action :authenticate_user!, only: [:new, :edit, :create, :update, :destroy, :my_posts]
   before_action :user_required, only: [:edit, :update, :destroy]
   PER_PAGE = 5
 
@@ -60,6 +60,11 @@ class PostController < ApplicationController
     resource.destroy
     flash[:success] = 'Post deleted'
     redirect_to root_path
+  end
+
+  def my_posts
+    @posts = Post.includes(:user).where(user_id: current_user.id).order('created_at desc')
+    @posts = @posts.paginate(page: params[:page], per_page: PER_PAGE)
   end
 
   private

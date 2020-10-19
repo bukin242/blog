@@ -4,4 +4,5 @@ Rails.application.routes.draw do
   get '/profile' => 'profile#edit', as: :profile_edit
   post '/profile' => 'profile#update', as: :profile_update
   resources :post, as: :posts
+  get '/my' => 'post#my_posts', as: :my_posts
 end

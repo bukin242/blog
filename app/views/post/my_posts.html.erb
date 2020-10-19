@@ -1,0 +1,7 @@
+<h1>My posts</h1>
+<div class="posts">
+  <% @posts.each do |post| %>
+    <%= render partial: 'shared/post', locals: {post: post} %>
+  <% end %>
+  <%= will_paginate @posts %>
+</div>
