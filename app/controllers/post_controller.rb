@@ -2,7 +2,7 @@ class PostController < ApplicationController
   PER_PAGE = 5
 
   def index
-    @posts = Post.order('created_at desc')
+    @posts = Post.active.order('created_at desc')
     @posts = @posts.paginate(page: params[:page], per_page: PER_PAGE)
   end
 
@@ -19,7 +19,13 @@ class PostController < ApplicationController
   end
 
   def create
-    @post = Post.create(name: post_params[:name], annonce: post_params[:annonce], text: post_params[:text])
+    @post = Post.create(
+      active: post_params[:active],
+      name: post_params[:name],
+      annonce: post_params[:annonce],
+      text: post_params[:text],
+      user_id: current_user.id
+    )
 
     if @post.errors.present?
       render :new
