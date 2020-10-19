@@ -40,6 +40,7 @@ class PostController < ApplicationController
       text: post_params[:text],
       user_id: current_user.id
     )
+    @tags = Tag.order_by_name
 
     if params[:tags]
       params[:tags].each do |tag_id|
