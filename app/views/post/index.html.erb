@@ -8,4 +8,5 @@
     </div>
     <div class="annonce"><%= simple_format(post.annonce) %></div>
   <% end %>
+  <%= will_paginate @posts %>
 </div>

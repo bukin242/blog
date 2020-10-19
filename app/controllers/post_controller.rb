@@ -1,6 +1,9 @@
 class PostController < ApplicationController
+  PER_PAGE = 5
+
   def index
     @posts = Post.order('created_at desc')
+    @posts = @posts.paginate(page: params[:page], per_page: PER_PAGE)
   end
 
   def show
