@@ -1,0 +1,10 @@
+<h1>Tags</h1>
+<div class="tags">
+  <% @tags.each do |tag| %>
+    <h2><%= tag.name %></h2>
+    <div class="update_links">
+      <small><%= link_to 'Edit', edit_tag_path(tag.id) %></small>
+      <small><%= link_to 'Delete', tag_path(tag.id), data: {method: :delete, confirm: 'Are you sure?'} %></small>
+    </div>
+  <% end %>
+</div>

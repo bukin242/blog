@@ -1,0 +1,4 @@
+<h2>Tags</h2>
+<% @tags.each do |tag| %>
+  <%= link_to tag.name, "#{root_path}?tag=#{tag.id}" %>
+<% end %>

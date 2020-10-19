@@ -10,6 +10,20 @@
     <%= f.text_area :text %><br>
     <%= f.label :created_time %><br>
     <%= f.text_field :created_at %><br>
+
+    <h3>Tags</h3>
+    <select name="tags[]" multiple="multiple">
+      <% @tags.each do |tag| %>
+        <option
+          value="<%= tag.id %>"
+
+          <% if @tags_selected.include?(tag.id) %>
+          selected="selected"
+          <% end %>
+        ><%= tag.name %></option>
+      <% end %>
+    </select>
+
     <%= f.submit %>
   <%end%>
 </div>

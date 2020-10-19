@@ -1,0 +1,9 @@
+<div class="tag_form">
+  <%= render 'shared/errors', object: @tag %>
+
+  <%= form_for @tag do |f| %>
+    <%= f.label :name %><br>
+    <%= f.text_field :name %><br>
+    <%= f.submit %>
+  <%end%>
+</div>

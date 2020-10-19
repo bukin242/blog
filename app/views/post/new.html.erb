@@ -10,6 +10,14 @@
     <%= f.text_area :text %><br>
     <%= f.label :active %><br>
     <%= f.check_box :active %><br>
+
+    <h3>Tags</h3>
+    <select name="tags[]" multiple="multiple">
+      <% @tags.each do |tag| %>
+        <option value="<%= tag.id %>"><%= tag.name %></option>
+      <% end %>
+    </select>
+
     <%= f.submit %>
   <%end%>
 </div>

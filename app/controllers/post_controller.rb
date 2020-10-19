@@ -5,7 +5,14 @@ class PostController < ApplicationController
 
   def index
     @posts = Post.active.includes(:user).order('created_at desc')
+
+    if tag_id
+      @posts = @posts.joins(:post_tags).where("post_tags.tag_id = #{tag_id}")
+    end
+
     @posts = @posts.paginate(page: params[:page], per_page: PER_PAGE)
+
+    @tags = Tag.order_by_name
   end
 
   def show
@@ -14,10 +21,13 @@ class PostController < ApplicationController
 
   def edit
     @post = resource
+    @tags = Tag.order_by_name
+    @tags_selected = resource.tags.pluck(:id)
   end
 
   def new
     @post = Post.new
+    @tags = Tag.order_by_name
   end
 
   def create
@@ -28,6 +38,10 @@ class PostController < ApplicationController
       text: post_params[:text],
       user_id: current_user.id
     )
+
+    params[:tags].each do |tag_id|
+      @post.post_tags.create(tag_id: tag_id)
+    end
 
     if @post.errors.present?
       render :new
@@ -49,6 +63,11 @@ class PostController < ApplicationController
     @post.text = post_params[:text]
     @post.created_at = created_at
     @post.save
+
+    @post.post_tags.destroy_all
+    params[:tags].each do |tag_id|
+      @post.post_tags.create(tag_id: tag_id)
+    end
 
     if @post.errors.present?
       render :edit
@@ -83,6 +102,10 @@ class PostController < ApplicationController
 
   def post_params
     params.require(:post)
+  end
+
+  def tag_id
+    params[:tag]
   end
 
   def resource

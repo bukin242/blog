@@ -4,6 +4,8 @@
     <% if current_user %>
     <li><%= link_to 'My posts', my_posts_path %></li>
     <li><%= link_to 'Add new post', new_post_path %></li>
+    <li><%= link_to 'Tags', tags_path %></li>
+    <li><%= link_to 'Add new tags', new_tag_path %></li>
     <% end %>
   </ul>
 </div>
