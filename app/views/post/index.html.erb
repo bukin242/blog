@@ -1,12 +1,14 @@
 <h1>Posts</h1>
 <div class="posts">
-  <% @posts.each do |post| %>
-    <h2><%= link_to post.name, post_path(post.id) %></h2>
-    <div class="update_links">
-      <small><%= link_to 'Edit', edit_post_path(post.id) %></small>
-      <small><%= link_to 'Delete', post_path(post.id), data: {method: :delete, confirm: 'Are you sure?'} %></small>
-    </div>
-    <div class="annonce"><%= simple_format(post.annonce) %></div>
+  <% cache(['posts', current_user.id, params[:page], params[:tag]], expires_in: 1.hour) do %>
+    <% @posts.each do |post| %>
+      <h2><%= link_to post.name, post_path(post.id) %></h2>
+      <div class="update_links">
+        <small><%= link_to 'Edit', edit_post_path(post.id) %></small>
+        <small><%= link_to 'Delete', post_path(post.id), data: {method: :delete, confirm: 'Are you sure?'} %></small>
+      </div>
+      <div class="annonce"><%= simple_format(post.annonce) %></div>
+    <% end %>
   <% end %>
   <%= will_paginate @posts %>
 </div>
