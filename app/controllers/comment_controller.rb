@@ -3,7 +3,7 @@ class CommentController < ApplicationController
   before_action :expires_require, only: [:edit, :update, :destroy]
   before_action :user_require, only: [:edit, :update, :destroy]
 
-  EXPIRES_TIME = 5.minutes
+  EXPIRES_TIME = 15.minutes
 
   def create
     Comment.create(
