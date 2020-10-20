@@ -1,24 +1,25 @@
-# README
+# INSTALL
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+* RVM
+```
+$ rvm install 2.7.1
+$ rvm use 2.7.1@blog --ruby-version --create
+```
 
-Things you may want to cover:
+* bundle
+```
+$ bundle install
+$ yarn add @rails/webpacker@next
+$ rails webpacker:install
+```
 
-* Ruby version
+* Изменить файл .env, вставить свой логин, пароль от бд
+```
+$ rails db:create
+$ rails db:migrate
+```
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* Запуск приложения
+```
+$ rails s
+```
