@@ -3,14 +3,11 @@ class CommentController < ApplicationController
   before_action :expires_require, only: [:edit, :update, :destroy]
   before_action :user_require, only: [:edit, :update, :destroy]
 
-  EXPIRES_TIME = 15.minutes
-
   def create
     Comment.create(
       post_id: post_id,
       text: comment_params[:text],
-      user_id: current_user.id,
-      expires_at: EXPIRES_TIME.from_now
+      user_id: current_user.id
     )
 
     flash[:success] = I18n.t('controllers.comment.create')
@@ -46,7 +43,7 @@ class CommentController < ApplicationController
   private
 
   def expires_require
-    if DateTime.current > resource.expires_at
+    if resource.expires?
       redirect_to post_path(post_id)
     end
   end

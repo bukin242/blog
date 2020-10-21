@@ -15,7 +15,7 @@
         </div>
 
         <div class="update_links">
-          <% if current_user == comment.user and DateTime.current < comment.expires_at %>
+          <% if current_user == comment.user and !comment.expires? %>
           <small><%= link_to 'Edit', edit_post_comment_path(post_id: @post.id, id: comment.id) %></small>
           <small><%= link_to 'Delete', post_comment_path(post_id: @post.id, id: comment.id), data: {method: :delete, confirm: 'Are you sure?'} %></small>
           <% end %>

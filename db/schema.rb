@@ -19,7 +19,6 @@ ActiveRecord::Schema.define(version: 2020_10_19_123725) do
     t.bigint "post_id"
     t.bigint "user_id"
     t.text "text", null: false
-    t.datetime "expires_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["post_id"], name: "index_comments_on_post_id"

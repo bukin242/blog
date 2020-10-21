@@ -42,7 +42,7 @@ describe CommentController, type: :controller do
 
     context 'expires time' do
       let!(:new_post) { create :post, user: user }
-      let!(:comment) { create :comment, post: new_post, user: user, expires_at: 1.minutes.ago }
+      let!(:comment) { create :comment, post: new_post, user: user, created_at: 16.minutes.ago }
       let(:data) do
         {
           post_id: new_post.id,
@@ -75,7 +75,7 @@ describe CommentController, type: :controller do
 
     context 'expires time' do
       let!(:post) { create :post, user: user }
-      let!(:comment) { create :comment, post: post, user: user, expires_at: 1.minutes.ago }
+      let!(:comment) { create :comment, post: post, user: user, created_at: 16.minutes.ago }
       before do
         sign_in user
         delete :destroy, params: {post_id: post.id, id: comment.id}

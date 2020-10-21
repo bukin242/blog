@@ -9,4 +9,18 @@ describe Comment, type: :model do
   context 'validations' do
     it { is_expected.to validate_presence_of(:text) }
   end
+
+  context '#expires?' do
+    context 'not expires' do
+      let!(:comment) { create :comment }
+
+      it { expect(comment.expires?).to eq false }
+    end
+
+    context 'expires time' do
+      let!(:comment) { create :comment, created_at: 16.minutes.ago }
+
+      it { expect(comment.expires?).to eq true }
+    end
+  end
 end
